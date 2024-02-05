@@ -22,7 +22,7 @@ func TestValidationService_ValidateLength(t *testing.T) {
 
 	t.Run("Input Too Short", func(t *testing.T) {
 
-		validator := Validator{rule: rules}
+		validator := NewValidator(rules)
 
 		err := validator.Validate("Full Name", "123")
 		assert.NotNil(t, err)
@@ -30,7 +30,7 @@ func TestValidationService_ValidateLength(t *testing.T) {
 	})
 
 	t.Run("Input Too Long", func(t *testing.T) {
-		validator := Validator{rule: rules}
+		validator := NewValidator(rules)
 
 		err := validator.Validate("Full Name", "12345678901")
 		assert.NotNil(t, err)
@@ -38,7 +38,7 @@ func TestValidationService_ValidateLength(t *testing.T) {
 	})
 
 	t.Run("Input Length OK", func(t *testing.T) {
-		validator := Validator{rule: rules}
+		validator := NewValidator(rules)
 
 		err := validator.Validate("Full Name", "123456")
 		assert.Nil(t, err)
@@ -53,7 +53,7 @@ func TestValidationService_ValidatePrefix(t *testing.T) {
 	}
 
 	t.Run("Prefix Invalid", func(t *testing.T) {
-		validator := Validator{rule: rules}
+		validator := NewValidator(rules)
 
 		err := validator.Validate("Phone", "+611111")
 		assert.NotNil(t, err)
@@ -61,7 +61,7 @@ func TestValidationService_ValidatePrefix(t *testing.T) {
 	})
 
 	t.Run("Prefix Valid", func(t *testing.T) {
-		validator := Validator{rule: rules}
+		validator := NewValidator(rules)
 
 		err := validator.Validate("Phone", "+62811231")
 		assert.Nil(t, err)
@@ -82,7 +82,7 @@ func TestValidationService_ValidatePassword(t *testing.T) {
 	}
 
 	t.Run("Password Only Lowercase", func(t *testing.T) {
-		validator := Validator{rule: rules}
+		validator := NewValidator(rules)
 
 		err := validator.Validate("Password", "asd")
 		assert.NotNil(t, err)
@@ -92,7 +92,7 @@ func TestValidationService_ValidatePassword(t *testing.T) {
 	})
 
 	t.Run("Password Only Uppercase", func(t *testing.T) {
-		validator := Validator{rule: rules}
+		validator := NewValidator(rules)
 
 		err := validator.Validate("Password", "ASD")
 		assert.NotNil(t, err)
@@ -101,7 +101,7 @@ func TestValidationService_ValidatePassword(t *testing.T) {
 	})
 
 	t.Run("Password With Uppercase and Numeric", func(t *testing.T) {
-		validator := Validator{rule: rules}
+		validator := NewValidator(rules)
 
 		err := validator.Validate("Password", "ASD123")
 		assert.NotNil(t, err)
@@ -109,7 +109,7 @@ func TestValidationService_ValidatePassword(t *testing.T) {
 	})
 
 	t.Run("Password With Uppercase, Numeric, and Special Character", func(t *testing.T) {
-		validator := Validator{rule: rules}
+		validator := NewValidator(rules)
 
 		err := validator.Validate("Password", "@ASD123")
 		assert.Nil(t, err)

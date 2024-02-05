@@ -5,17 +5,13 @@ import (
 	"unicode"
 )
 
-type Validator struct {
-	rule Rules
+func (v *ValidatorImpl) Add(rule Rule) {
+	v.rules = append(v.rules, rule)
 }
 
-func (v *Validator) Add(rule Rule) {
-	v.rule = append(v.rule, rule)
-}
-
-func (v *Validator) Validate(key, data string) []error {
+func (v *ValidatorImpl) Validate(key, data string) []error {
 	var errors []error
-	for _, rule := range v.rule {
+	for _, rule := range v.rules {
 		err := rule(key, data)
 		if err != nil {
 			errors = append(errors, err)

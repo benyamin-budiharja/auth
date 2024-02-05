@@ -1,5 +1,6 @@
 package validation
 
-type CreateUserValidation interface {
-	IsValid()
+type Validator interface {
+	Add(rule Rule)
+	Validate(key, data string) []error
 }
