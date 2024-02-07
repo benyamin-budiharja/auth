@@ -5,7 +5,7 @@ import (
 
 	"github.com/SawitProRecruitment/UserService/generated"
 	"github.com/SawitProRecruitment/UserService/handler"
-	"github.com/SawitProRecruitment/UserService/repository"
+	user_repository "github.com/SawitProRecruitment/UserService/repository/user"
 
 	"github.com/labstack/echo/v4"
 )
@@ -21,7 +21,7 @@ func main() {
 
 func newServer() *handler.Server {
 	dbDsn := os.Getenv("DATABASE_URL")
-	var repo repository.RepositoryInterface = repository.NewRepository(repository.NewRepositoryOptions{
+	var repo user_repository.UserRepositoryInterface = user_repository.NewUserRepository(user_repository.NewRepositoryOptions{
 		Dsn: dbDsn,
 	})
 	opts := handler.NewServerOptions{

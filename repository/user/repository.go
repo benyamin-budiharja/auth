@@ -1,5 +1,5 @@
 // This file contains the repository implementation layer.
-package repository
+package user_repository
 
 import (
 	"database/sql"
@@ -7,7 +7,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
-type Repository struct {
+type UserRepository struct {
 	Db *sql.DB
 }
 
@@ -15,12 +15,12 @@ type NewRepositoryOptions struct {
 	Dsn string
 }
 
-func NewRepository(opts NewRepositoryOptions) *Repository {
+func NewUserRepository(opts NewRepositoryOptions) *UserRepository {
 	db, err := sql.Open("postgres", opts.Dsn)
 	if err != nil {
 		panic(err)
 	}
-	return &Repository{
+	return &UserRepository{
 		Db: db,
 	}
 }
